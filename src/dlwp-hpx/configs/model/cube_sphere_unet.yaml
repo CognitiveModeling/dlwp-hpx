@@ -1,0 +1,18 @@
+defaults:
+  - decoder: unet_decoder
+  - encoder: unet_caprelu
+
+_target_: dlwp.model.models.unet.CubeSphereUnet
+_recursive_: false
+input_time_dim: ${data.input_time_dim}
+output_time_dim: ${data.output_time_dim}
+
+# Parameters automatically overridden in train code
+# input_channels
+# output_channels
+# n_constants
+# decoder_input_channels
+input_channels: 6
+output_channels: 6
+n_constants: 2
+decoder_input_channels: 1

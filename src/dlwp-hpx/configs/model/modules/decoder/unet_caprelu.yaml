@@ -1,0 +1,15 @@
+_target_: dlwp.model.models.unet.UnetDecoder
+_recursive_: false
+n_channels:
+  - 256
+  - 128
+  - 64
+convolutions_per_depth: 2
+kernel_size: 3
+upsampling_type: interpolate
+upsampling: 2
+activation:
+  _target_: dlwp.model.layers.activations.CappedLeakyReLU
+  cap_value: 10.
+add_polar_layer: true
+flip_north_pole: true

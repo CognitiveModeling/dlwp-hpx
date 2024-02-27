@@ -1,0 +1,38 @@
+[project]
+name = "DLWP-HPX"
+version = "0.0.1"
+authors = [
+  { name="Matthias Karlbauer", email="matthias.karlbauer@uni-tuebingen.de" },
+  { name="Nathaniel Cresswell-Clay", email="ncc@uw.edu" },
+  { name="Thorsten Kurth", email="tkurth@nvidia.com" },
+]
+description = "Package to realize Deep Learning Weather Prediction on the HEALPix mesh."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+	"hydra-core",
+	"numpy",
+	"torch",
+	"torchinfo",
+	"tqdm",
+	"tensorboard",
+	"pandas",
+	"xarray[complete]",
+	"healpy",
+	"reproject",
+	"einops"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dlwp-hpx"]
+
+[project.urls]
+Homepage = "https://github.com/pypa/sampleproject"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

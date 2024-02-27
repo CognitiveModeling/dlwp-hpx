@@ -1,0 +1,5 @@
+_target_: dlwp.model.losses.GeneratorLoss
+_recursive_: true
+loss:
+  _target_: torch.nn.MSELoss
+disc_score_weight: 1e-3

@@ -1,0 +1,5 @@
+#defaults:
+#  - optimizer: sgd
+
+_target_: gdtuo.Adam
+learning_rate: ${learning_rate}

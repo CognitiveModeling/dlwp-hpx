@@ -1,0 +1,10 @@
+defaults:
+  - /model/modules/activations@activation: capped_gelu
+
+_target_: dlwp.model.modules.blocks.ConvNeXtLSTMBlock
+_recursive_: false
+in_channels: 1
+h_channels: 1
+kernel_size: 7
+dilation: 1
+dropout: 0.

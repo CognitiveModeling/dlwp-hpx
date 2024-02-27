@@ -1,0 +1,7 @@
+generator:
+  _target_: torch.optim.Adam
+  lr: ${learning_rate}
+
+discriminator:
+  _target_: torch.optim.Adam
+  lr: 2e-4

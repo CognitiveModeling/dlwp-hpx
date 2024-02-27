@@ -1,0 +1,12 @@
+_target_: pytorch_lightning.Trainer
+_recursive_: true
+benchmark: false
+deterministic: false
+log_every_n_steps: 10
+max_epochs: 500
+min_epochs: 100
+precision: 16
+strategy:
+  _target_: pytorch_lightning.plugins.DDPPlugin
+  find_unused_parameters: false
+val_check_interval: 1.0

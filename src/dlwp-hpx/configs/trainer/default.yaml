@@ -1,0 +1,23 @@
+defaults:
+  - criterion: mse
+  - optimizer: fused_adam
+  - lr_scheduler: plateau
+
+_target_: dlwp.trainer.trainer.Trainer
+_recursive_: true
+max_epochs: 1
+min_epochs: 1
+early_stopping_patience: null
+amp_mode: "fp16"
+graph_mode: "train_eval"
+output_dir: ${output_dir}
+
+#_target_: pytorch_lightning.Trainer
+#_recursive_: true
+#benchmark: false
+#deterministic: false
+#gpus: 1
+#log_every_n_steps: 10
+#max_epochs: 500
+#min_epochs: 100
+#val_check_interval: 1.0

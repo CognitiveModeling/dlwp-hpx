@@ -1,0 +1,16 @@
+defaults:
+  # These blocks can be overridden via the added hydra searchpath 'file:///model/modules/blocks' in the main config.yaml
+  - conv_block: ../../modules/blocks/basic_conv_block
+  - up_sampling_block: ../../modules/blocks/transposed_conv_upsample
+  - output_layer: ../../modules/blocks/output_layer
+
+_target_: dlwp.model.models.unet.UNetDecoder
+_recursive_: false
+n_channels:
+  - 256
+  - 128
+  - 64
+dilations:
+  - 4
+  - 2
+  - 1

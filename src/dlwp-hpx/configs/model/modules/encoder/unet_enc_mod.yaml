@@ -1,0 +1,14 @@
+defaults:
+  - conv_block: null  #../../modules/blocks/basic_conv_block
+  - down_sampling_block: null  #../../modules/blocks/avg_pool
+
+_target_: dlwp.model.modules.encoder.UNetEncoder
+_recursive_: false
+n_channels:
+  - 64
+  - 128
+  - 256
+dilations:
+  - 1
+  - 2
+  - 4

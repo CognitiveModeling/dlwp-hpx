@@ -1,0 +1,2 @@
+_target_: dlwp.model.modules.blocks.AvgPool
+pooling: 2

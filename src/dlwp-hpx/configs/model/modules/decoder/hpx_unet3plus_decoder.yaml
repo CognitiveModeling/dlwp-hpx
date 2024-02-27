@@ -1,0 +1,17 @@
+defaults:
+  - conv_block: ../../modules/blocks/conv_next_block
+  - down_sampling_block: ../../modules/blocks/avg_pool
+  - up_sampling_block: ../../modules/blocks/transposed_conv_upsample
+  - skip_block: ../../modules/blocks/skip_block
+  - output_layer: ../../modules/blocks/output_layer
+
+_target_: dlwp.model.models.hpx_unet.Unet3PlusDecoder
+_recursive_: false
+n_channels:
+  - 256
+  - 128
+  - 64
+dilations:
+  - 4
+  - 2
+  - 1
