@@ -4,11 +4,11 @@
 
 Download $n$-yearly data chunks per variable from the [ERA5 dataset](https://cds.climate.copernicus.eu/cdsapp#!/search?type=dataset&text=era5).
 
-Retrieve data from ECMWF using `cdsapi` (installation described [here](https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5]). An example script is [era5_download.py](src/dlwp-hpx/data/era5_download.py).
+Retrieve data from ECMWF using `cdsapi` (installation described [here](https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5]). An example script is [era5_download.py](era5_download.py).
 
 ## Prepare Tau300-700
 
-To compute and generate the pressure difference field, use [tau_calculation.py](src/dlwp-hpx/data/tau_calculation.py).
+To compute and generate the pressure difference field, use [tau_calculation.py](tau_calculation.py).
 
 ## Convert to HEALPix
 
