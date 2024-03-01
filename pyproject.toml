@@ -3,7 +3,7 @@ name = "DLWP-HPX"
 version = "0.0.1"
 authors = [
   { name="Matthias Karlbauer", email="matthias.karlbauer@uni-tuebingen.de" },
-  { name="Nathaniel Cresswell-Clay", email="ncc@uw.edu" },
+  { name="Nathaniel Cresswell-Clay", email="nacc@uw.edu" },
   { name="Thorsten Kurth", email="tkurth@nvidia.com" },
 ]
 description = "Package to realize Deep Learning Weather Prediction on the HEALPix mesh."

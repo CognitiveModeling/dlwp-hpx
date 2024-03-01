@@ -1,6 +1,10 @@
 ## Getting Started
 
-Install `dlwp-hpx` package with `pip install .`, favorably in a dedicated environment. Then cd into `src/dlwp-hpx`
+Create an environment with pyhton installed, e.g., with `conda create -n dlwp-hpx python` and activate it with `conda activate dlwp-hpx`.
+
+Install `dlwp-hpx` package with `pip install .`, favorably in a dedicated environment (as shown above). Then cd into `src/dlwp-hpx`
+
+Verify installation with `python remap/healpix.py`, which projects the exemplary `data/era5_z500.nc` file from the equirectangular LatLon convention of shape $[..., H, W]$ (with $H$ the latitudes and $W$ the longitudes) into the HEALPix mesh of shape $[..., F, H, W]$, where $F=12$ the number of faces and $H=W$ the side length of the squares.
 
 
 ## Data
@@ -26,6 +30,7 @@ Subsequently, project the data to the HEALPix mesh, using the remapping function
 ## Train
 
 Multiple exemplary commands to train a DLWP-HPX model are provided in `src/dlwp-hpx/scripts/run_training.sh`. To start a training of the HEALPix model, prepare an according `RUN_CMND` in `run_training.sh` and run `sh scripts/train.py` (from `src/dlwp-hpx/`).
+
 
 ## Forecast
 
