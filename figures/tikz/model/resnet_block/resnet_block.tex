@@ -1,0 +1,155 @@
+\documentclass[margin=0mm,tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{xcolor}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{quotes}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+% -----------------------
+% colors
+% -----------------------
+\definecolor{forwardcolor}{RGB}{100, 100, 100}
+\definecolor{operatorcolor}{RGB}{136, 150, 186}
+\definecolor{resnetcolor}{RGB}{0, 93, 157}
+\definecolor{skipcolor}{RGB}{218, 138, 0}
+
+% Set background color
+%\pagecolor{white}
+
+% -----------------------
+% colors
+% -----------------------
+
+\tikzstyle{operator} = [
+    circle,
+    draw,
+    top color = skipcolor!70!white,
+    bottom color = skipcolor!80!white, 
+    text=black,
+    minimum size=0.5cm,
+    inner sep=0pt
+]
+
+\tikzstyle{projection} = [
+	midway,
+	draw,
+	rounded corners=2pt,
+	top color = black!70!white,
+	bottom color = black!80!white, 
+	text=white,
+	minimum size=0.5cm,
+	inner sep=2pt,
+	rotate=0,
+]
+
+\tikzstyle{forward} = [-{Latex[length=2pt, width=4pt]}, line width=1pt, forwardcolor]
+\tikzstyle{skip} = [-{Latex[length=3pt, width=5pt]}, line width=2pt, skipcolor]
+
+\tikzset{
+	annotated cuboid/.pic={
+		\tikzset{%
+			every edge quotes/.append style={midway, auto},
+			/cuboid/.cd,
+			#1
+		}
+
+		% coordinate scheme of the cube
+		%
+		%    e---------h
+		%   /|        /|
+		%  / |       / |
+		% a---------d  |
+		% |  |      |  |
+		% |  f------|--g
+		% | /       | /
+		% |/        |/
+		% b---------c
+		
+		% Set up the corner coordinates of the cube
+		\coordinate (a) at (-\cwidth*\cscale*0.5, \cheight*\cscale*0.5, 0);
+		\coordinate (b) at (-\cwidth*\cscale*0.5, -\cheight*\cscale*0.5, 0);
+		\coordinate (c) at (\cwidth*\cscale*0.5, -\cheight*\cscale*0.5, 0);
+		\coordinate (d) at (\cwidth*\cscale*0.5, \cheight*\cscale*0.5, 0);
+		\coordinate (e) at (-\cwidth*\cscale*0.5, \cheight*\cscale*0.5, -\cdepth*\cscale);
+		\coordinate (f) at (-\cwidth*\cscale*0.5, -\cheight*\cscale*0.5, -\cdepth*\cscale);
+		\coordinate (g) at (\cwidth*\cscale*0.5, -\cheight*\cscale*0.5, -\cdepth*\cscale);
+		\coordinate (h) at (\cwidth*\cscale*0.5, \cheight*\cscale*0.5, -\cdepth*\cscale);
+		
+
+		% Clip the cube image to the outer coordinates
+		\clip (a) -- (b) -- (c) -- (g) -- (h) -- (e) -- cycle;
+		
+		%
+		% Draw the cube
+		
+		% Dashed, hidden lines
+		\draw[\ccolor, dashed, very thick] (f) -- (b);
+		\draw[\ccolor, dashed, very thick] (f) -- (g);
+		\draw[\ccolor, dashed, very thick] (f) -- (e);
+		
+		% Faces
+		\draw[fill=\ccolor, opacity=0.6] (a) -- (b) -- (c) -- (d) -- cycle;  % front
+		\draw[fill=\ccolor, opacity=0.6] (a) -- (d) -- (h) -- (e) -- cycle;  % top
+		\draw[fill=\ccolor, opacity=0.6] (d) -- (c) -- (g) -- (h) -- cycle;  % right
+		
+		% Redraw edges of the faces
+		\draw[\ccolor, very thick] (a) -- (b) -- (c) -- (d) -- cycle;  % front
+		\draw[\ccolor, very thick] (a) -- (d) -- (h) -- (e) -- cycle;  % top
+		\draw[\ccolor, very thick] (d) -- (c) -- (g) -- (h) -- cycle;  % right
+		
+		% Draw annotations
+		\draw (a) edge ["\textbf{\lheight}"] (b);
+		\draw (b) edge ["\textbf{\lwidth}"] (c);
+	
+		% Define the node for this kernel
+		\node [anchor=north west, minimum width=\cwidth*\cscale cm, minimum height=\cheight*\cscale cm] (\clabel) at (a) {};
+	
+	},
+	/cuboid/.search also={/tikz},
+	/cuboid/.cd,
+	width/.store in=\cwidth,
+	height/.store in=\cheight,
+	depth/.store in=\cdepth,
+	units/.store in=\cunits,
+	scale/.store in=\cscale,
+	label/.store in=\clabel,
+	lwidth/.store in=\lwidth,
+	lheight/.store in=\lheight,
+	ccolor/.store in=\ccolor,
+	width=1,
+	height=1,
+	depth=1,
+	units=cm,
+	scale=1.0,
+	label=dummy,
+	lwidth=2,
+	lheight=2,
+	ccolor=gray,
+}
+
+\begin{document}
+	\begin{tikzpicture}
+	
+	% Maps
+	\pic {annotated cuboid={width=0.7, height=4, depth=4, units=, label=input, lwidth=, lheight=}};
+	\pic [right=2.5cm of input] {annotated cuboid={width=0.7, height=4, depth=4, units=, label=c1, lwidth=, lheight=, ccolor=resnetcolor}};
+	\pic [right=2.5cm of c1] {annotated cuboid={width=0.7, height=4, depth=4, units=, label=c2, lwidth=, lheight=, ccolor=resnetcolor}};
+	\node[operator, right=0.2cm of c2] (plus) {$+$};
+	\pic [right=1.7cm of plus] {annotated cuboid={width=0.7, height=4, depth=4, units=, label=output, lwidth=, lheight=, ccolor=resnetcolor}};
+	
+	% Arrows
+	\draw[forward] (input) -- (c1) node[projection] {\shortstack[l]{$3\times3$ conv,\\ReLU}};
+	\draw[forward] (c1) -- (c2) node[projection] {$3\times3$ conv};
+	\draw[forward] (c2) -- (plus);
+	\draw[skip] (input.north) --++ (0, 1cm) -- ([yshift=1cm]input.north -| plus) -- (plus.north);
+	\draw[forward] (plus) -- (output) node[projection] {ReLU};
+		
+	\end{tikzpicture}
+\end{document}
